@@ -67,3 +67,39 @@ Antes (fraco):
 
 Depois (voz Badaró):
 > "Emoção não é intuição. É dado. E lemos esse dado antes de desenhar qualquer solução."
+
+---
+
+**Site — Hero subheadline**
+
+Antes (fraco):
+> "A Badaró é uma consultoria estratégica de design e tecnologia. Há mais de 12 anos, transformamos dados, pesquisa e engenharia em experiências orientadas pela emoção — o critério central de valor, conexão e desempenho."
+
+Depois (voz Badaró):
+> "Há mais de 12 anos, transformamos dados, pesquisa e engenharia em experiências reais — conduzidas pela emoção como critério de valor."
+
+Por quê: O subheadline deve ser uma frase de impacto, não um parágrafo. Frases longas acima da dobra perdem o leitor antes de convencer. Referência: padrão IDEO — uma frase que define, não explica.
+
+---
+
+**Site — Subtítulo de seção de serviços**
+
+Antes (fraco):
+> "Cinco disciplinas integradas. Uma visão estratégica."
+
+Depois (voz Badaró):
+> "Cinco disciplinas. Uma lógica: a experiência como ponto de partida de tudo."
+
+Por quê: "Uma visão estratégica" é genérico — qualquer consultoria poderia dizer. A versão revisada ancora na crença central da Badaró e diferencia. Referência: Fjord — o que diferencia aparece na frase de suporte, não no headline.
+
+---
+
+**Site — CTA final**
+
+Antes (fraco):
+> "Pronto para evoluir com coerência emocional e impacto mensurável?"
+
+Depois (voz Badaró):
+> "Seu próximo projeto começa por uma conversa."
+
+Por quê: Pergunta retórica com dois conceitos da marca acumulados soa como slogan. CTA deve reduzir distância, não aumentar a densidade conceitual. Referência: Livework Studio — CTAs diretos e humanos.
