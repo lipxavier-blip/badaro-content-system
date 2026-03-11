@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Content System — Badaró</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f9f8f6;
+      --surface: #ffffff;
+      --sidebar-bg: #111110;
+      --sidebar-text: #a8a29e;
+      --sidebar-active: #ffffff;
+      --accent: #e07b3a;
+      --accent-light: #fef3eb;
+      --text: #1c1917;
+      --text-muted: #78716c;
+      --border: #e7e5e4;
+      --tag-bg: #f5f5f4;
+      --code-bg: #f5f5f4;
+      --sidebar-width: 260px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      min-height: 100vh;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: var(--sidebar-width);
+      background: var(--sidebar-bg);
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      overflow-y: auto;
+      padding: 32px 0;
+      z-index: 100;
+    }
+
+    .sidebar-logo {
+      padding: 0 24px 32px;
+      border-bottom: 1px solid #1c1b1a;
+    }
+
+    .sidebar-logo .brand {
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.3px;
+    }
+
+    .sidebar-logo .tagline {
+      font-size: 11px;
+      color: #57534e;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-top: 4px;
+    }
+
+    .sidebar-section {
+      padding: 20px 24px 8px;
+    }
+
+    .sidebar-section-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #44403c;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .sidebar nav a {
+      display: block;
+      padding: 7px 24px;
+      color: var(--sidebar-text);
+      text-decoration: none;
+      font-size: 13.5px;
+      transition: color 0.15s;
+      border-left: 2px solid transparent;
+    }
+
+    .sidebar nav a:hover {
+      color: #d4cdc8;
+    }
+
+    .sidebar nav a.active {
+      color: var(--sidebar-active);
+      border-left-color: var(--accent);
+      background: #1c1917;
+    }
+
+    .sidebar nav a .nav-number {
+      color: #44403c;
+      margin-right: 6px;
+      font-size: 12px;
+    }
+
+    /* MAIN */
+    .main {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      padding: 0 0 80px;
+    }
+
+    /* TOP BAR */
+    .topbar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .topbar-title {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .topbar-badge {
+      font-size: 11px;
+      background: var(--accent-light);
+      color: var(--accent);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    /* CONTENT */
+    .content {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 56px 48px;
+    }
+
+    /* SECTION */
+    .section {
+      margin-bottom: 80px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-number {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.4px;
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+
+    /* BLOCKS */
+    h3 {
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--text-muted);
+      margin: 32px 0 12px;
+    }
+
+    h3:first-child { margin-top: 0; }
+
+    p {
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    ul {
+      list-style: none;
+      margin-bottom: 16px;
+    }
+
+    ul li {
+      padding: 6px 0 6px 16px;
+      position: relative;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    ul li:last-child { border-bottom: none; }
+
+    ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    /* CALLOUT */
+    .callout {
+      background: var(--accent-light);
+      border-left: 3px solid var(--accent);
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 20px 0;
+      font-size: 15px;
+      font-style: italic;
+      color: #7c2d12;
+    }
+
+    /* CARD GRID */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 16px 0;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .card-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .card-accent {
+      border-top: 2px solid var(--accent);
+    }
+
+    /* TABLE */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 13.5px;
+    }
+
+    thead th {
+      text-align: left;
+      padding: 10px 14px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--text-muted);
+      background: var(--tag-bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    tbody td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: top;
+    }
+
+    tbody tr:last-child td { border-bottom: none; }
+
+    tbody td:first-child { font-weight: 500; }
+
+    /* TONE EXAMPLE */
+    .tone-example {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 20px 0;
+    }
+
+    .tone-example-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 10px 16px;
+      background: var(--tag-bg);
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tone-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .tone-col {
+      padding: 16px;
+    }
+
+    .tone-col:first-child {
+      border-right: 1px solid var(--border);
+    }
+
+    .tone-col-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 8px;
+    }
+
+    .tone-col.bad .tone-col-label { color: #dc2626; }
+    .tone-col.good .tone-col-label { color: #16a34a; }
+
+    .tone-col blockquote {
+      font-size: 13.5px;
+      color: var(--text);
+      line-height: 1.5;
+      font-style: italic;
+    }
+
+    .tone-reason {
+      padding: 10px 16px;
+      background: #fafaf9;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .tone-reason strong { color: var(--text); }
+
+    /* PILLAR */
+    .pillar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 12px;
+    }
+
+    .pillar-number {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 6px;
+    }
+
+    .pillar-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .pillar-text {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* TAG */
+    .tag {
+      display: inline-block;
+      background: var(--tag-bg);
+      color: var(--text-muted);
+      font-size: 12px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin: 3px 3px 3px 0;
+    }
+
+    .tag.danger {
+      background: #fef2f2;
+      color: #dc2626;
+    }
+
+    /* FLOW */
+    .flow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 16px 0;
+      flex-wrap: wrap;
+    }
+
+    .flow-step {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .flow-arrow {
+      color: var(--accent);
+      font-size: 16px;
+    }
+
+    /* CODE */
+    .pattern-block {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 12.5px;
+      color: var(--text);
+      line-height: 1.7;
+      margin: 12px 0;
+    }
+
+    /* ANTI-VOICE */
+    .anti-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0;
+    }
+
+    /* CHECKLIST */
+    .checklist li {
+      padding-left: 24px;
+      font-size: 14px;
+    }
+
+    .checklist li::before {
+      content: '□';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 14px;
+      background: none;
+      width: auto;
+      height: auto;
+      border-radius: 0;
+      transform: none;
+      top: 6px;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      background: var(--sidebar-bg);
+      padding: 64px 48px;
+      margin-bottom: 0;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-size: 36px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      color: #78716c;
+      max-width: 480px;
+      line-height: 1.6;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .hero-stat {
+      text-align: left;
+    }
+
+    .hero-stat-value {
+      font-size: 22px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .hero-stat-label {
+      font-size: 11px;
+      color: #57534e;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    /* DIVIDER */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 32px 0;
+    }
+
+    /* SCROLLBAR */
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-track { background: transparent; }
+    .sidebar::-webkit-scrollbar-thumb { background: #292524; border-radius: 2px; }
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="brand">Badaró</div>
+    <div class="tagline">Content System</div>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">Sistema</div>
+    <nav>
+      <a href="#foundations" class="active"><span class="nav-number">01</span> Foundations</a>
+      <a href="#verbal-identity"><span class="nav-number">02</span> Verbal Identity</a>
+      <a href="#messaging"><span class="nav-number">03</span> Messaging Framework</a>
+      <a href="#voice-tone"><span class="nav-number">04</span> Voice & Tone</a>
+      <a href="#style-guide"><span class="nav-number">05</span> Editorial Style Guide</a>
+      <a href="#patterns"><span class="nav-number">06</span> Content Patterns</a>
+      <a href="#governance"><span class="nav-number">07</span> Content Governance</a>
+    </nav>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">Skills</div>
+    <nav>
+      <a href="#tone-checker">Tone Checker</a>
+      <a href="#tone-examples">Auto Tone Examples</a>
+    </nav>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">AI Emotion-driven Experience</div>
+    <div class="hero-title">Content System<br>Badaró</div>
+    <div class="hero-desc">Regras verbais, identidade, mensagem, tom e governança editorial. Tudo que orienta a criação de conteúdo da Badaró.</div>
+    <div class="hero-meta">
+      <div class="hero-stat">
+        <div class="hero-stat-value">7</div>
+        <div class="hero-stat-label">Módulos</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">2</div>
+        <div class="hero-stat-label">Skills ativas</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">12+</div>
+        <div class="hero-stat-label">Anos de marca</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <span class="topbar-title">badaro-content-system</span>
+    <span class="topbar-badge">v1.0 — março 2026</span>
+  </div>
+
+  <div class="content">
+
+    <!-- 01 FOUNDATIONS -->
+    <section class="section" id="foundations">
+      <div class="section-header">
+        <span class="section-number">01</span>
+        <h2 class="section-title">Foundations</h2>
+        <span class="section-subtitle">Fundamentos</span>
+      </div>
+
+      <div class="callout">
+        Para a Badaró, a experiência não é um resultado final, mas o ponto de partida da estratégia.
+      </div>
+
+      <h3>Princípios de Conteúdo</h3>
+      <ul>
+        <li>Emoção é critério estratégico, não intuição — use-a para orientar decisões de conteúdo</li>
+        <li>Clareza antes de sofisticação — o conteúdo deve ser compreendido por quem decide</li>
+        <li>Conteúdo orientado à decisão — cada peça deve ajudar alguém a avançar</li>
+        <li>Linguagem acessível a especialistas — técnica quando necessário, nunca hermética</li>
+        <li>Evitar jargão vazio — sem buzzwords que não sustentam significado real</li>
+        <li>Dados e emoção juntos — evidências sem emoção não convencem; emoção sem evidência não sustenta</li>
+      </ul>
+
+      <h3>Princípios de Experiência</h3>
+      <ul>
+        <li>Conteúdo deve reduzir esforço cognitivo — menos fricção, mais clareza</li>
+        <li>Informação deve aparecer no momento certo — relevância contextual sempre</li>
+        <li>Comunicação deve apoiar a tomada de decisão — não apenas informar, mas orientar</li>
+        <li>Cada entrega deve gerar valor prático — conteúdo que não é usado não existe</li>
+        <li>Consistência entre canais — o que é dito em um ponto de contato deve ressoar nos outros</li>
+      </ul>
+    </section>
+
+    <!-- 02 VERBAL IDENTITY -->
+    <section class="section" id="verbal-identity">
+      <div class="section-header">
+        <span class="section-number">02</span>
+        <h2 class="section-title">Verbal Identity</h2>
+        <span class="section-subtitle">Identidade Verbal</span>
+      </div>
+
+      <h3>Propósito</h3>
+      <div class="callout">
+        Estruturar experiências que sustentem decisões melhores, relações mais fortes e organizações preparadas para o futuro.
+      </div>
+
+      <h3>Posicionamento</h3>
+      <p><strong>AI Emotion-driven Experience</strong> — Consultoria estratégica de design e tecnologia que, há mais de 12 anos, orienta decisões organizacionais a partir de experiências reais. Atuamos na interseção entre pesquisa, design e tecnologia — com clareza, precisão e impacto mensurável.</p>
+
+      <h3>Personalidade</h3>
+      <div class="card-grid">
+        <div class="card card-accent">
+          <div class="card-title">Estratégica</div>
+          <div class="card-text">Pensa antes de propor, entende antes de agir</div>
+        </div>
+        <div class="card card-accent">
+          <div class="card-title">Precisa</div>
+          <div class="card-text">Usa as palavras certas, sem excessos</div>
+        </div>
+        <div class="card card-accent">
+          <div class="card-title">Próxima</div>
+          <div class="card-text">Trabalha lado a lado, não de cima para baixo</div>
+        </div>
+        <div class="card card-accent">
+          <div class="card-title">Humana</div>
+          <div class="card-text">Emoção é dado, não decoração</div>
+        </div>
+      </div>
+
+      <h3>Arquétipos</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">O Sábio — primário</div>
+          <div class="card-text">Orienta com base em conhecimento profundo. Não vende — esclarece.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">O Parceiro — secundário</div>
+          <div class="card-text">Trabalha junto, respeita a cultura do cliente, constrói em colaboração.</div>
+        </div>
+      </div>
+
+      <h3>Anti-voz — evitar sempre</h3>
+      <div class="anti-list">
+        <span class="tag danger">Tom de vendedor</span>
+        <span class="tag danger">Superlativos vazios</span>
+        <span class="tag danger">Jargão técnico sem contexto</span>
+        <span class="tag danger">Frieza corporativa</span>
+        <span class="tag danger">Urgência artificial</span>
+        <span class="tag danger">Humildade excessiva</span>
+      </div>
+    </section>
+
+    <!-- 03 MESSAGING -->
+    <section class="section" id="messaging">
+      <div class="section-header">
+        <span class="section-number">03</span>
+        <h2 class="section-title">Messaging Framework</h2>
+        <span class="section-subtitle">Estrutura de Mensagem</span>
+      </div>
+
+      <h3>Mensagem Central</h3>
+      <div class="callout">
+        Transformamos dados, pesquisa e engenharia em experiências reais — conduzidas pela emoção como critério central de valor, conexão e desempenho.
+      </div>
+
+      <h3>Pilares de Mensagem</h3>
+
+      <div class="pillar">
+        <div class="pillar-number">Pilar 01</div>
+        <div class="pillar-title">Emoção como estratégia</div>
+        <div class="pillar-text">A emoção não é intuição — é um sinal mensurável que orienta decisões melhores. A Badaró usa dados emocionais como critério de projeto, não como decoração.</div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-number">Pilar 02</div>
+        <div class="pillar-title">Experiência como ponto de partida</div>
+        <div class="pillar-text">Antes de propor soluções, a Badaró escuta profundamente. A experiência real das pessoas define o diagnóstico, não o contrário.</div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-number">Pilar 03</div>
+        <div class="pillar-title">Integração entre pesquisa, design e tecnologia</div>
+        <div class="pillar-text">Não somos só design. Não somos só tech. Somos a consultoria que integra as três disciplinas com coerência estratégica e rigor metodológico.</div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-number">Pilar 04</div>
+        <div class="pillar-title">Parceria de longo prazo</div>
+        <div class="pillar-text">Trabalhamos lado a lado com o cliente. Entendemos a governança, a cultura e o nível real de maturidade antes de propor qualquer entrega.</div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-number">Pilar 05</div>
+        <div class="pillar-title">Impacto mensurável</div>
+        <div class="pillar-text">Cada projeto gera valor prático. Criamos experiências que funcionam na prática — com critérios claros e visão de longo prazo.</div>
+      </div>
+
+      <h3>Narrativas</h3>
+      <table>
+        <thead>
+          <tr><th>Narrativa</th><th>Síntese</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>A experiência como ponto de partida</td><td>A maioria das empresas trata experiência como entrega. A Badaró trata como método.</td></tr>
+          <tr><td>Emoção não é intuição</td><td>Emoção é dado. Lemos sinais emocionais como variáveis estratégicas.</td></tr>
+          <tr><td>Tecnologia a serviço da experiência</td><td>Na Badaró, tecnologia não é um fim. É o meio que viabiliza experiências com escala.</td></tr>
+          <tr><td>Parcerias que funcionam na prática</td><td>Cada projeto é desenhado para ser usado de fato. Respeitamos cultura e maturidade real.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 04 VOICE & TONE -->
+    <section class="section" id="voice-tone">
+      <div class="section-header">
+        <span class="section-number">04</span>
+        <h2 class="section-title">Voice & Tone</h2>
+        <span class="section-subtitle">Voz e Tom</span>
+      </div>
+
+      <p>A voz é constante — o que muda é o tom conforme o contexto. A Badaró fala como um parceiro estratégico experiente: direto, claro, sem arrogância.</p>
+
+      <h3>Matriz de Tom por Contexto</h3>
+      <table>
+        <thead>
+          <tr><th>Contexto</th><th>Tom</th><th>Intensidade</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Site institucional</td><td>Claro e estratégico</td><td>Alta</td></tr>
+          <tr><td>Propostas comerciais</td><td>Consultivo e preciso</td><td>Média</td></tr>
+          <tr><td>Artigos e conteúdos</td><td>Didático e substantivo</td><td>Média</td></tr>
+          <tr><td>Redes sociais</td><td>Conversacional e direto</td><td>Média-baixa</td></tr>
+          <tr><td>Comunicação interna</td><td>Próximo e transparente</td><td>Baixa</td></tr>
+          <tr><td>Cases e resultados</td><td>Confiante e factual</td><td>Alta</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Exemplos Antes / Depois</h3>
+
+      <div class="tone-example">
+        <div class="tone-example-label">Site — Apresentação de serviço</div>
+        <div class="tone-row">
+          <div class="tone-col bad">
+            <div class="tone-col-label">Antes — fraco</div>
+            <blockquote>Oferecemos soluções inovadoras de Customer Experience para empresas que buscam se destacar no mercado.</blockquote>
+          </div>
+          <div class="tone-col good">
+            <div class="tone-col-label">Depois — voz Badaró</div>
+            <blockquote>Desenhamos experiências de cliente a partir da jornada real — identificando emoções, fricções e oportunidades que influenciam decisões, engajamento e fidelização.</blockquote>
+          </div>
+        </div>
+      </div>
+
+      <div class="tone-example">
+        <div class="tone-example-label">Site — Hero subheadline</div>
+        <div class="tone-row">
+          <div class="tone-col bad">
+            <div class="tone-col-label">Antes — fraco</div>
+            <blockquote>A Badaró é uma consultoria estratégica de design e tecnologia. Há mais de 12 anos, transformamos dados, pesquisa e engenharia em experiências orientadas pela emoção — o critério central de valor, conexão e desempenho.</blockquote>
+          </div>
+          <div class="tone-col good">
+            <div class="tone-col-label">Depois — voz Badaró</div>
+            <blockquote>Há mais de 12 anos, transformamos dados, pesquisa e engenharia em experiências reais — conduzidas pela emoção como critério de valor.</blockquote>
+          </div>
+        </div>
+        <div class="tone-reason"><strong>Por quê:</strong> Subheadline deve ser uma frase de impacto, não um parágrafo. Frases longas acima da dobra perdem o leitor antes de convencer.</div>
+      </div>
+
+      <div class="tone-example">
+        <div class="tone-example-label">Site — CTA final</div>
+        <div class="tone-row">
+          <div class="tone-col bad">
+            <div class="tone-col-label">Antes — fraco</div>
+            <blockquote>Pronto para evoluir com coerência emocional e impacto mensurável?</blockquote>
+          </div>
+          <div class="tone-col good">
+            <div class="tone-col-label">Depois — voz Badaró</div>
+            <blockquote>Seu próximo projeto começa por uma conversa.</blockquote>
+          </div>
+        </div>
+        <div class="tone-reason"><strong>Por quê:</strong> Pergunta retórica com dois conceitos da marca acumulados soa como slogan. CTA deve reduzir distância, não aumentar densidade conceitual.</div>
+      </div>
+
+      <div class="tone-example">
+        <div class="tone-example-label">Redes sociais — Post sobre emoção</div>
+        <div class="tone-row">
+          <div class="tone-col bad">
+            <div class="tone-col-label">Antes — fraco</div>
+            <blockquote>A emoção é fundamental para criar experiências incríveis! 🚀</blockquote>
+          </div>
+          <div class="tone-col good">
+            <div class="tone-col-label">Depois — voz Badaró</div>
+            <blockquote>Emoção não é intuição. É dado. E lemos esse dado antes de desenhar qualquer solução.</blockquote>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 STYLE GUIDE -->
+    <section class="section" id="style-guide">
+      <div class="section-header">
+        <span class="section-number">05</span>
+        <h2 class="section-title">Editorial Style Guide</h2>
+        <span class="section-subtitle">Guia Editorial</span>
+      </div>
+
+      <h3>Regras Editoriais</h3>
+      <table>
+        <thead>
+          <tr><th>Regra</th><th>Como aplicar</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Siglas de serviço</td><td>Sempre maiúsculas: CX, UX, TX, BX, EX</td></tr>
+          <tr><td>Nome da marca</td><td>Sempre "Badaró" — com acento, com maiúscula</td></tr>
+          <tr><td>Números até 9</td><td>Por extenso: três anos, seis projetos</td></tr>
+          <tr><td>Números a partir de 10</td><td>Numeral: 12 anos, 40 projetos</td></tr>
+          <tr><td>Primeira menção de sigla</td><td>Customer Experience (CX) — depois só CX</td></tr>
+          <tr><td>Títulos e subtítulos</td><td>Sem ponto final</td></tr>
+          <tr><td>Cargos no texto</td><td>Minúsculos: diretor, gerente de experiência</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Glossário — Terminologia da Marca</h3>
+      <table>
+        <thead>
+          <tr><th>Usar</th><th>Evitar</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>experiência</td><td>jornada do cliente (quando genérico)</td></tr>
+          <tr><td>ponto de contato</td><td>touchpoint (para não-especialistas)</td></tr>
+          <tr><td>coerência emocional</td><td>fit emocional</td></tr>
+          <tr><td>impacto mensurável</td><td>ROI (isolado, sem contexto)</td></tr>
+          <tr><td>diagnóstico</td><td>assessment (em pt-BR)</td></tr>
+          <tr><td>sustentação</td><td>manutenção (de produto/serviço contínuo)</td></tr>
+          <tr><td>escuta profunda</td><td>pesquisa (quando o processo vai além do survey)</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Buzzwords — Evitar sem contexto real</h3>
+      <div class="anti-list">
+        <span class="tag danger">inovador</span>
+        <span class="tag danger">disruptivo</span>
+        <span class="tag danger">ecossistema</span>
+        <span class="tag danger">sinergia</span>
+        <span class="tag danger">mindset</span>
+        <span class="tag danger">empoderar</span>
+        <span class="tag danger">end-to-end</span>
+        <span class="tag danger">protagonismo</span>
+      </div>
+    </section>
+
+    <!-- 06 CONTENT PATTERNS -->
+    <section class="section" id="patterns">
+      <div class="section-header">
+        <span class="section-number">06</span>
+        <h2 class="section-title">Content Patterns</h2>
+        <span class="section-subtitle">Padrões de Conteúdo</span>
+      </div>
+
+      <h3>Página de Serviço</h3>
+      <div class="pattern-block">
+1. Headline — o que fazemos (direto, sem infinitivo)
+2. Problema — o que a organização enfrenta sem esse trabalho
+3. Abordagem — como a Badaró conduz (método, não lista de features)
+4. Impacto — o que muda depois (concreto, não promessa genérica)
+5. CTA — próximo passo claro</div>
+
+      <h3>Case</h3>
+      <div class="pattern-block">
+1. Contexto — quem é o cliente e qual era o cenário
+2. Desafio — o problema real (não o briefing, o problema de fundo)
+3. Estratégia — como a Badaró abordou (método + decisões-chave)
+4. Resultado — impacto mensurável + impacto emocional/percebido</div>
+
+      <h3>Artigo</h3>
+      <div class="pattern-block">
+1. Problema — a tensão ou questão que o artigo endereça
+2. Insight — a virada de perspectiva que a Badaró traz
+3. Explicação — como funciona, por quê, com dados ou referências
+4. Aplicação prática — o que o leitor pode fazer com isso</div>
+
+      <h3>Post em Redes Sociais</h3>
+      <div class="pattern-block">
+1. Abertura — frase que para o scroll (provocação, dado, afirmação direta)
+2. Desenvolvimento — 2 a 4 linhas que sustentam a abertura
+3. Fechamento — conclusão ou convite à reflexão (sem CTA forçado)</div>
+
+      <h3>Headline Patterns</h3>
+      <table>
+        <thead>
+          <tr><th>Formato</th><th>Exemplo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>[O que fazemos] que [resultado]</td><td>Experiências de cliente que geram fidelização real</td></tr>
+          <tr><td>[Problema] → [O que a Badaró faz]</td><td>Jornadas fragmentadas. A Badaró reconecta.</td></tr>
+          <tr><td>[Afirmação direta sobre crença]</td><td>Emoção não é intuição. É dado.</td></tr>
+          <tr><td>[Pergunta que o cliente já faz]</td><td>Onde a experiência do seu cliente está quebrando?</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 07 GOVERNANCE -->
+    <section class="section" id="governance">
+      <div class="section-header">
+        <span class="section-number">07</span>
+        <h2 class="section-title">Content Governance</h2>
+        <span class="section-subtitle">Governança de Conteúdo</span>
+      </div>
+
+      <h3>Fluxo de Criação</h3>
+      <div class="flow">
+        <div class="flow-step">Estratégia</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Criação</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Revisão Editorial</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Aprovação</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Publicação</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Atualização</div>
+      </div>
+
+      <h3>Checklist de Revisão Editorial</h3>
+      <ul class="checklist">
+        <li>O tom está alinhado com o contexto? (ver matriz em Voice & Tone)</li>
+        <li>Sem buzzwords?</li>
+        <li>Voz ativa predominante?</li>
+        <li>Frases curtas e diretas?</li>
+        <li>Terminologia correta? (ver glossário)</li>
+        <li>A sigla foi apresentada na primeira menção?</li>
+        <li>O conteúdo orienta uma decisão ou ação?</li>
+      </ul>
+
+      <h3>Responsabilidades</h3>
+      <table>
+        <thead>
+          <tr><th>Papel</th><th>Responsabilidade</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Estrategista de conteúdo</td><td>Define objetivo, canal e estrutura</td></tr>
+          <tr><td>Redator / content designer</td><td>Cria seguindo os padrões do sistema</td></tr>
+          <tr><td>Revisor editorial</td><td>Aplica o checklist antes da publicação</td></tr>
+          <tr><td>Responsável pela marca</td><td>Aprova conteúdo institucional</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section" id="tone-checker">
+      <div class="section-header">
+        <span class="section-number">Skill</span>
+        <h2 class="section-title">Tone Checker</h2>
+      </div>
+      <p>Verifica se o conteúdo criado está alinhado com a voz e o tom da Badaró antes da publicação. Usa a matriz de contexto e a anti-voz como referência principal.</p>
+
+      <h3>Checklist de Tom</h3>
+      <ul class="checklist">
+        <li>Consistência com a voz da marca</li>
+        <li>Adequação ao canal de publicação</li>
+        <li>Alinhamento com o público-alvo</li>
+        <li>Ausência de anti-voz</li>
+      </ul>
+    </section>
+
+    <section class="section" id="tone-examples">
+      <div class="section-header">
+        <span class="section-number">Skill</span>
+        <h2 class="section-title">Auto Tone Examples</h2>
+      </div>
+      <p>Executada automaticamente a cada novo conteúdo criado. Identifica tensões de tom, gera exemplos antes/depois e salva em Voice & Tone para enriquecer o sistema continuamente.</p>
+
+      <h3>Referências externas</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">IDEO</div>
+          <div class="card-text">Humano, baseado em método. Uma frase que define, não explica.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Fjord</div>
+          <div class="card-text">Estratégico e direto. O diferencial aparece no suporte, não no headline.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">McKinsey Design</div>
+          <div class="card-text">Preciso e orientado a resultado. Dado + contexto + implicação.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Livework Studio</div>
+          <div class="card-text">Próximo e transparente. CTAs diretos que reduzem a distância.</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<script>
+  // Highlight active nav item on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.sidebar nav a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + entry.target.id) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
