@@ -602,6 +602,175 @@
     .sidebar::-webkit-scrollbar { width: 3px; }
     .sidebar::-webkit-scrollbar-track { background: transparent; }
     .sidebar::-webkit-scrollbar-thumb { background: #222; border-radius: 2px; }
+
+    /* ── MOBILE NAV BUTTON ── */
+    .mobile-nav-btn {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 36px; height: 36px;
+      background: var(--black);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .mobile-nav-btn span {
+      display: block;
+      width: 16px; height: 1.5px;
+      background: var(--white);
+      position: relative;
+      transition: background 0.2s;
+    }
+
+    .mobile-nav-btn span::before,
+    .mobile-nav-btn span::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 16px; height: 1.5px;
+      background: var(--white);
+      transition: transform 0.2s;
+    }
+
+    .mobile-nav-btn span::before { top: -5px; }
+    .mobile-nav-btn span::after  { top: 5px; }
+
+    /* ── OVERLAY ── */
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 90;
+    }
+
+    .overlay.visible { display: block; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .main {
+        margin-left: 0;
+      }
+
+      .mobile-nav-btn {
+        display: flex;
+      }
+
+      .topbar {
+        padding: 12px 20px;
+        gap: 12px;
+      }
+
+      .topbar-path {
+        font-size: 11px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .hero {
+        padding: 40px 24px 36px;
+      }
+
+      .hero-title {
+        font-size: 36px;
+        letter-spacing: -1.5px;
+      }
+
+      .hero-desc {
+        font-size: 14px;
+      }
+
+      .hero-stats {
+        margin-top: 32px;
+        padding-top: 24px;
+        gap: 0;
+      }
+
+      .hero-stat {
+        padding-right: 24px;
+        margin-right: 24px;
+      }
+
+      .hero-stat-value { font-size: 22px; }
+
+      .content {
+        padding: 36px 20px;
+      }
+
+      .section { margin-bottom: 60px; }
+
+      .section-header {
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 24px;
+      }
+
+      .section-sub { display: none; }
+
+      .section-title { font-size: 22px; }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tone-row {
+        grid-template-columns: 1fr;
+      }
+
+      .tone-col:first-child {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 14px;
+        border: 1px solid var(--border);
+        margin: 16px 0;
+      }
+
+      .table-wrap table {
+        margin: 0;
+        border-radius: 0;
+        border: none;
+        min-width: 480px;
+      }
+
+      .callout {
+        font-size: 14px;
+        padding: 18px 20px;
+      }
+
+      .flow {
+        gap: 6px;
+      }
+
+      .flow-step {
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+
+      .flow-arrow { font-size: 14px; }
+
+      .pattern-block {
+        font-size: 13px;
+        padding: 16px 18px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -661,6 +830,7 @@
 
   <!-- TOPBAR -->
   <div class="topbar">
+    <button class="mobile-nav-btn" id="menuBtn" aria-label="Menu"><span></span></button>
     <span class="topbar-path">badaro-content-system / <span>index</span></span>
     <span class="topbar-badge">v1.0 — março 2026</span>
   </div>
@@ -828,7 +998,7 @@
       <p>A voz é constante — o que muda é o tom conforme o contexto. A Badaró fala como um parceiro estratégico experiente: direto, claro, sem arrogância.</p>
 
       <h3>Matriz de Tom por Contexto</h3>
-      <table>
+      <div class="table-wrap"><table>
         <thead><tr><th>Contexto</th><th>Tom</th><th>Intensidade</th></tr></thead>
         <tbody>
           <tr><td>Site institucional</td><td>Claro e estratégico</td><td>Alta</td></tr>
@@ -838,7 +1008,7 @@
           <tr><td>Comunicação interna</td><td>Próximo e transparente</td><td>Baixa</td></tr>
           <tr><td>Cases e resultados</td><td>Confiante e factual</td><td>Alta</td></tr>
         </tbody>
-      </table>
+      </table></div>
 
       <h3>Exemplos Antes / Depois</h3>
 
@@ -910,7 +1080,7 @@
       </div>
 
       <h3>Regras Editoriais</h3>
-      <table>
+      <div class="table-wrap"><table>
         <thead><tr><th>Regra</th><th>Como aplicar</th></tr></thead>
         <tbody>
           <tr><td>Siglas de serviço</td><td>Sempre maiúsculas: CX, UX, TX, BX, EX</td></tr>
@@ -921,10 +1091,10 @@
           <tr><td>Títulos e subtítulos</td><td>Sem ponto final</td></tr>
           <tr><td>Cargos no texto</td><td>Minúsculos: diretor, gerente de experiência</td></tr>
         </tbody>
-      </table>
+      </table></div>
 
       <h3>Glossário da Marca</h3>
-      <table>
+      <div class="table-wrap"><table>
         <thead><tr><th>Usar</th><th>Evitar</th></tr></thead>
         <tbody>
           <tr><td>experiência</td><td>jornada do cliente (quando genérico)</td></tr>
@@ -935,7 +1105,7 @@
           <tr><td>sustentação</td><td>manutenção (de produto/serviço contínuo)</td></tr>
           <tr><td>escuta profunda</td><td>pesquisa (quando o processo vai além do survey)</td></tr>
         </tbody>
-      </table>
+      </table></div>
 
       <h3>Buzzwords — evitar sem contexto real</h3>
       <div class="tag-group">
@@ -983,7 +1153,7 @@
 3. Fechamento — conclusão ou convite à reflexão (sem CTA forçado)</div>
 
       <h3>Headline Patterns</h3>
-      <table>
+      <div class="table-wrap"><table>
         <thead><tr><th>Formato</th><th>Exemplo</th></tr></thead>
         <tbody>
           <tr><td>[O que fazemos] que [resultado]</td><td>Experiências de cliente que geram fidelização real</td></tr>
@@ -991,7 +1161,7 @@
           <tr><td>[Afirmação sobre crença]</td><td>Emoção não é intuição. É dado.</td></tr>
           <tr><td>[Pergunta do cliente]</td><td>Onde a experiência do seu cliente está quebrando?</td></tr>
         </tbody>
-      </table>
+      </table></div>
     </section>
 
     <!-- 07 GOVERNANCE -->
@@ -1024,7 +1194,7 @@
       </ul>
 
       <h3>Responsabilidades</h3>
-      <table>
+      <div class="table-wrap"><table>
         <thead><tr><th>Papel</th><th>Responsabilidade</th></tr></thead>
         <tbody>
           <tr><td>Estrategista de conteúdo</td><td>Define objetivo, canal e estrutura</td></tr>
@@ -1032,7 +1202,7 @@
           <tr><td>Revisor editorial</td><td>Aplica o checklist antes da publicação</td></tr>
           <tr><td>Responsável pela marca</td><td>Aprova conteúdo institucional</td></tr>
         </tbody>
-      </table>
+      </table></div>
     </section>
 
     <!-- SKILL: TONE CHECKER -->
@@ -1083,7 +1253,10 @@
   </div>
 </main>
 
+<div class="overlay" id="overlay"></div>
+
 <script>
+  // Active nav on scroll
   const sections = document.querySelectorAll('section[id]');
   const links = document.querySelectorAll('.sidebar nav a');
   const observer = new IntersectionObserver(entries => {
@@ -1096,6 +1269,31 @@
     });
   }, { rootMargin: '-20% 0px -70% 0px' });
   sections.forEach(s => observer.observe(s));
+
+  // Mobile menu
+  const sidebar = document.querySelector('.sidebar');
+  const overlay = document.getElementById('overlay');
+  const menuBtn = document.getElementById('menuBtn');
+
+  function openMenu() {
+    sidebar.classList.add('open');
+    overlay.classList.add('visible');
+  }
+
+  function closeMenu() {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('visible');
+  }
+
+  menuBtn.addEventListener('click', () => {
+    sidebar.classList.contains('open') ? closeMenu() : openMenu();
+  });
+
+  overlay.addEventListener('click', closeMenu);
+
+  links.forEach(l => l.addEventListener('click', () => {
+    if (window.innerWidth <= 768) closeMenu();
+  }));
 </script>
 </body>
 </html>
