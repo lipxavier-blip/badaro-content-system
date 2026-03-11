@@ -39,6 +39,12 @@ badaro-content-system/
 - Registrar aprendizados relevantes em `skills/learn.md`
 - Atualizar `memory.md` com decisões de projeto e contexto acumulado
 
+## Skill de revisão mensal
+
+Quando o usuário pedir "revisão mensal" ou similar, executar `skills/monthly-review.md`.
+O foco principal é `6-content-patterns.md` — padrões de conteúdo são o que mais evolui.
+Sempre apresentar resumo para aprovação antes de salvar qualquer mudança.
+
 ## Skill automática — Tom
 
 **Toda vez que um conteúdo for criado ou revisado, execute `skills/auto-tone-examples.md` automaticamente.**
