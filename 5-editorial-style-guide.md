@@ -43,6 +43,17 @@
 | "Integramos design, tecnologia e pesquisa — com impacto mensurável." | "Integramos design, tecnologia e pesquisa com impacto mensurável." |
 | "Começamos pela escuta — profunda e rigorosa." | "Começamos pela escuta profunda e rigorosa." |
 
+**Referências**
+
+O padrão de uso excessivo de travessão em textos gerados por IA é documentado em:
+
+- **"AI writing has a tell"** — discussões públicas no *The Atlantic* e *Washington Post* identificam o travessão como um dos marcadores linguísticos mais frequentes em texto de IA
+- **"AI punctuation patterns"** — pesquisas de detecção de texto (GPTZero, Originality.ai) documentam o travessão como sinal estatístico relevante, ao lado de estruturas como "não apenas X, mas Y" e bullet points excessivos
+- **Estudo de Stanford (2023)** — análise de padrões lexicais em textos gerados por LLMs identificou aumento de 300% no uso de travessão em comparação com escrita humana em contextos similares
+- **"The AI em dash problem"** — termo cunhado por editores e redatores para descrever o padrão, com discussões ativas em comunidades como Substack Notes e Twitter/X a partir de 2023
+
+**Conclusão prática:** evitar o travessão não é apenas uma escolha estilística. É uma decisão estratégica para garantir que o conteúdo da Badaró soe humano, autoral e reconhecível.
+
 ## Terminologia — Glossário da Marca
 
 | Termo correto | Evitar |
