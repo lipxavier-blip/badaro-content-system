@@ -38,3 +38,11 @@ badaro-content-system/
 - Usar os padrões de `6-content-patterns.md` como ponto de partida para qualquer formato
 - Registrar aprendizados relevantes em `skills/learn.md`
 - Atualizar `memory.md` com decisões de projeto e contexto acumulado
+
+## Skill automática — Tom
+
+**Toda vez que um conteúdo for criado ou revisado, execute `skills/auto-tone-examples.md` automaticamente.**
+
+Isso inclui: posts, artigos, headlines, copies de site, propostas, newsletters ou qualquer outro texto produzido para a Badaró.
+
+Não é necessário que o usuário solicite — a análise de tom é parte obrigatória de qualquer entrega.
