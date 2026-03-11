@@ -27,8 +27,21 @@
 ### Pontuação
 - Sem ponto final em títulos e subtítulos
 - Ponto e vírgula em listas quando os itens são frases completas
-- Dois-pontos para introduzir listas — sem maiúscula depois
-- Reticências com moderação — apenas quando a ambiguidade é intencional
+- Dois-pontos para introduzir listas, sem maiúscula depois
+- Reticências com moderação, apenas quando a ambiguidade é intencional
+
+### Travessão ( — )
+- **Evitar.** O uso frequente de travessão é associado a linguagem de IA e torna o texto artificialmente enfático
+- Substituir por ponto final, vírgula ou dois-pontos conforme o caso
+- Permitido apenas em casos muito específicos de ruptura intencional de ritmo, com moderação
+
+**Exemplos de substituição:**
+
+| Com travessão (evitar) | Sem travessão (preferir) |
+|---|---|
+| "Emoção não é intuição — é dado." | "Emoção não é intuição. É dado." |
+| "Integramos design, tecnologia e pesquisa — com impacto mensurável." | "Integramos design, tecnologia e pesquisa com impacto mensurável." |
+| "Começamos pela escuta — profunda e rigorosa." | "Começamos pela escuta profunda e rigorosa." |
 
 ## Terminologia — Glossário da Marca
 
