@@ -23,7 +23,9 @@ Contexto acumulado do projeto ao longo do tempo.
 - Arquivos em `content/`: home.md, tipos-de-servicos.md, sobre.md, clientes.md, servicos.md, contato.md
 - Contato: Hero, Seção de Especialistas e Seção de Formulário revisados. Campos do formulário pendentes (aguardando definição do time comercial)
 - Trabalhe Conosco: página completa revisada — Hero, Apresentação, Depoimentos, Diversidade, Nosso Propósito, Trabalhar Aqui, Pilares, Perfis, O que você encontra aqui, Encerramento
-- Páginas ainda não analisadas: Método, Cases/Projetos (e páginas internas de cada serviço)
+- Páginas internas de serviço revisadas: CX, UX, TX, BX, EX — arquivos em content/cx.md, ux.md, tx.md, bx.md, ex.md
+- AI Experience: conteúdo pendente (não estava pronto no momento da revisão)
+- Páginas ainda não analisadas: Método, Cases/Projetos
 
 ### Março 2026 — Setup inicial
 - Content System criado com 7 módulos a partir do Manual de Marca Simplificado e da apresentação de posicionamento da Badaró
