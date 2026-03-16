@@ -42,7 +42,7 @@ Lemos contextos, comportamentos e sinais emocionais para orientar decisões de n
 Produtos digitais e experiência
 
 **Headline**
-Onde o entendimento se transforma em experiência sentida
+Do entendimento à experiência sentida
 
 **Parágrafo**
 Traduzimos dados e intenção em produtos, serviços e marcas com coerência emocional, rigor técnico e impacto mensurável. O design estrutura relações, percepção de valor e engajamento real.
@@ -62,7 +62,7 @@ Traduzimos dados e intenção em produtos, serviços e marcas com coerência emo
 Tecnologia e sustentação
 
 **Headline**
-Onde a experiência ganha escala, continuidade e governança
+Experiência com escala e continuidade
 
 **Parágrafo**
 A tecnologia sustenta o valor emocional ao longo do tempo, reduz fricções e garante consistência operacional. Criamos estruturas técnicas para experiências que precisam evoluir, performar e se manter.

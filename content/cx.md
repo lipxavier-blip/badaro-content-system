@@ -50,3 +50,12 @@ O resultado é mensurável e duradouro: menos atrito na jornada, maior conversã
 | Implementação de CRM e gestão de jornadas | Implementamos e configuramos CRM com foco na gestão de jornadas. Dados do cliente organizados para orientar cada interação, no momento certo e no canal certo. |
 | Dashboards e BI de experiência | Estruturamos dashboards e inteligência de dados para que a experiência do cliente seja mensurável. Visibilidade sobre o que funciona, o que falha e onde atuar. |
 | Integrações e sustentação de canais | Integramos sistemas e sustentamos canais para que a experiência funcione de ponta a ponta. Continuidade técnica com foco em estabilidade e evolução. |
+
+---
+
+## Seção de Outros Projetos
+
+**Headline**
+Outros projetos da Badaró
+
+*Cards: nome do projeto e cliente — conteúdo fixo, sem alteração.*
