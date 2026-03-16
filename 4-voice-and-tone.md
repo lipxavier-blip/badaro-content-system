@@ -103,3 +103,15 @@ Depois (voz Badaró):
 > "Seu próximo projeto começa por uma conversa."
 
 Por quê: Pergunta retórica com dois conceitos da marca acumulados soa como slogan. CTA deve reduzir distância, não aumentar a densidade conceitual. Referência: Livework Studio — CTAs diretos e humanos.
+
+---
+
+**Site — Headline de seção de contato**
+
+Antes (fraco):
+> "Escolha o especialista ideal para sua conversa inicial"
+
+Depois (voz Badaró):
+> "Fale com quem entende o seu desafio"
+
+Por quê: "ideal" é superlativo vazio e "Escolha" soa como instrução de UI. A versão revisada ativa o atributo "Próximo", reduz a distância com o visitante e foca no valor da conversa, não no processo de seleção. Referência: Livework Studio — linguagem que aproxima, não que instrui.

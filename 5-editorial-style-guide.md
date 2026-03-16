@@ -57,6 +57,7 @@ O padrão de uso excessivo de travessão em textos gerados por IA é documentado
 
 | Termo correto | Evitar |
 |---|---|
+| Badalover | colaborador(a), funcionário(a), membro do time — Badalover é o termo proprietário da Badaró para quem faz parte do time |
 | experiência | jornada do cliente (quando genérico) |
 | ponto de contato | touchpoint (em textos para clientes não-especialistas) |
 | coerência emocional | fit emocional |
