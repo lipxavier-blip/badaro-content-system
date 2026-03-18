@@ -19,7 +19,7 @@ O mercado trata emoção como qualidade soft — importante, mas difícil de med
 
 Emoção não é intuição. É dado.
 
-Sinais emocionais são mensuráveis. Podem ser identificados na jornada, quantificados por metodologias específicas e usados como critério de projeto — da fase de pesquisa até a decisão de tecnologia. Quando se sabe o que as pessoas sentem em cada ponto da experiência, as decisões mudam. A arquitetura de informação muda. O fluxo muda. A priorização muda.
+Sinais emocionais são mensuráveis. Podem ser identificados na jornada, quantificados por metodologias específicas e usados como critério de projeto, da fase de pesquisa até a decisão de tecnologia. Quando se sabe o que as pessoas sentem em cada ponto da experiência, as decisões mudam. A arquitetura de informação muda. O fluxo muda. A priorização muda.
 
 A Badaró opera a partir dessa premissa há mais de doze anos. Emoção não é o tema da campanha. É a variável que orienta o diagnóstico, valida a solução e mede o resultado.
 
@@ -33,7 +33,7 @@ A aceleração da inteligência artificial está tornando a produção de experi
 
 O que se torna escasso — e, portanto, estratégico — é a experiência que gera vínculo real. Aquela que faz sentido para quem usa. Que reduz atrito onde importa. Que sustenta confiança ao longo do tempo.
 
-Sem emoção como critério, IA amplifica o genérico. Produz mais de algo que já não funcionava. Com emoção como critério, IA pode acelerar o que funciona — porque há uma fundação metodológica que orienta o que deve ser feito e o que não deve.
+Sem emoção como critério, IA amplifica o genérico. Produz mais de algo que já não funcionava. Com emoção como critério, IA pode acelerar o que funciona, porque há uma fundação metodológica que orienta o que deve ser feito e o que não deve.
 
 Esse é o momento em que a pergunta "o que as pessoas sentem?" deixa de ser filosófica e se torna operacional.
 
@@ -43,11 +43,11 @@ Esse é o momento em que a pergunta "o que as pessoas sentem?" deixa de ser filo
 
 Pesquisa, design e tecnologia são três disciplinas que muitas empresas usam separadas. A Badaró as integra sob uma mesma lógica: a experiência real das pessoas como ponto de partida de qualquer projeto.
 
-Antes de propor qualquer solução, escutamos. Jornadas. Shadowing. Testes de usabilidade. Análises heurísticas. Modelo Kano. Testes SUM. Não como checklist metodológico — como escuta profunda que revela onde a emoção do usuário está funcionando a favor do negócio e onde está trabalhando contra.
+Antes de propor qualquer solução, escutamos. Jornadas. Shadowing. Testes de usabilidade. Análises heurísticas. Modelo Kano. Testes SUM. Não como checklist metodológico, mas como escuta profunda que revela onde a emoção do usuário está funcionando a favor do negócio e onde está trabalhando contra.
 
-Esse diagnóstico orienta o design. O design orienta a tecnologia. E tecnologia não é fim — é o meio que viabiliza experiências com estabilidade, escala e evolução contínua.
+Esse diagnóstico orienta o design. O design orienta a tecnologia. E tecnologia não é fim. É o meio que viabiliza experiências com estabilidade, escala e evolução contínua.
 
-O resultado é uma consultoria que não entrega artefatos desconectados. Entrega uma lógica integrada: do que foi pesquisado, para o que foi desenhado, para o que foi construído — com coerência em cada camada.
+O resultado é uma consultoria que não entrega artefatos desconectados. Entrega uma lógica integrada: do que foi pesquisado, para o que foi desenhado, para o que foi construído, com coerência em cada camada.
 
 ---
 
