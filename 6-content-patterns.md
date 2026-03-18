@@ -16,9 +16,9 @@ Padrões reutilizáveis que garantem consistência sem engessar a criação.
 
 **Exemplo aplicado (CX):**
 > **Headline:** Experiências de cliente que reduzem atrito e geram fidelização real
-> **Problema:** Jornadas fragmentadas criam fricção invisível — e a empresa raramente sabe onde.
+> **Problema:** Jornadas fragmentadas criam fricção invisível. A empresa raramente sabe onde.
 > **Abordagem:** Começamos pela escuta. Mapeamos a jornada real do cliente, identificamos sinais emocionais e redesenhamos a experiência com consistência entre canais digitais e físicos.
-> **Impacto:** Mais conversão, mais fidelização, menos custo de atendimento — com dados que sustentam cada decisão.
+> **Impacto:** Mais conversão, mais fidelização, menos custo de atendimento. Cada decisão sustentada por dados.
 > **CTA:** Vamos conversar sobre sua jornada de cliente.
 
 ---
@@ -69,7 +69,7 @@ Padrões reutilizáveis que garantem consistência sem engessar a criação.
 **Exemplo:**
 > Emoção não é intuição. É dado.
 >
-> A Badaró lê sinais emocionais como variáveis estratégicas — antes de desenhar qualquer solução.
+> A Badaró lê sinais emocionais como variáveis estratégicas, antes de desenhar qualquer solução.
 >
 > É assim que transformamos pesquisa em experiência que funciona na prática.
 

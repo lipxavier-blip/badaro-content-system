@@ -35,12 +35,30 @@
 - Substituir por ponto final, vírgula ou dois-pontos conforme o caso
 - Permitido apenas em casos muito específicos de ruptura intencional de ritmo, com moderação
 
-**Exemplos de substituição:**
+**Exemplos de substituição por padrão:**
+
+**Travessão antes de gerúndio** → vírgula
+
+| Com travessão (evitar) | Sem travessão (preferir) |
+|---|---|
+| "Desenhamos experiências a partir da jornada real — identificando emoções e fricções." | "Desenhamos experiências a partir da jornada real, identificando emoções e fricções." |
+| "Transformamos dados em experiências reais — conduzidas pela emoção." | "Transformamos dados em experiências reais, conduzidas pela emoção." |
+| "A Badaró lê sinais emocionais — antes de desenhar qualquer solução." | "A Badaró lê sinais emocionais, antes de desenhar qualquer solução." |
+
+**Travessão como conector de cláusula** → ponto final + nova frase
 
 | Com travessão (evitar) | Sem travessão (preferir) |
 |---|---|
 | "Emoção não é intuição — é dado." | "Emoção não é intuição. É dado." |
+| "A voz é constante — o que muda é o tom." | "A voz é constante. O que muda é o tom." |
+| "Jornadas fragmentadas criam fricção — e a empresa raramente sabe onde." | "Jornadas fragmentadas criam fricção. A empresa raramente sabe onde." |
+
+**Travessão antes de complemento** → integrar à frase ou dois-pontos
+
+| Com travessão (evitar) | Sem travessão (preferir) |
+|---|---|
 | "Integramos design, tecnologia e pesquisa — com impacto mensurável." | "Integramos design, tecnologia e pesquisa com impacto mensurável." |
+| "Mais conversão, mais fidelização — com dados que sustentam cada decisão." | "Mais conversão, mais fidelização. Cada decisão sustentada por dados." |
 | "Começamos pela escuta — profunda e rigorosa." | "Começamos pela escuta profunda e rigorosa." |
 
 **Referências**

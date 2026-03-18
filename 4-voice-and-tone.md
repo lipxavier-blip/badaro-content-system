@@ -2,7 +2,7 @@
 
 ## Voz da Badaró
 
-A voz é constante — o que muda é o tom conforme o contexto.
+A voz é constante. O que muda é o tom conforme o contexto.
 
 A Badaró fala como um parceiro estratégico experiente: direto, claro, sem arrogância. Não usa o vocabulário de agência criativa nem o tom frio de relatório de consultoria. Está no meio: estratégica e humana ao mesmo tempo.
 
@@ -46,7 +46,7 @@ Antes (fraco):
 > "Oferecemos soluções inovadoras de Customer Experience para empresas que buscam se destacar no mercado."
 
 Depois (voz Badaró):
-> "Desenhamos experiências de cliente a partir da jornada real — identificando emoções, fricções e oportunidades que influenciam decisões, engajamento e fidelização."
+> "Desenhamos experiências de cliente a partir da jornada real, identificando emoções, fricções e oportunidades que influenciam decisões, engajamento e fidelização."
 
 ---
 
@@ -76,7 +76,7 @@ Antes (fraco):
 > "A Badaró é uma consultoria estratégica de design e tecnologia. Há mais de 12 anos, transformamos dados, pesquisa e engenharia em experiências orientadas pela emoção — o critério central de valor, conexão e desempenho."
 
 Depois (voz Badaró):
-> "Há mais de 12 anos, transformamos dados, pesquisa e engenharia em experiências reais — conduzidas pela emoção como critério de valor."
+> "Há mais de 12 anos, transformamos dados, pesquisa e engenharia em experiências reais, conduzidas pela emoção como critério de valor."
 
 Por quê: O subheadline deve ser uma frase de impacto, não um parágrafo. Frases longas acima da dobra perdem o leitor antes de convencer. Referência: padrão IDEO — uma frase que define, não explica.
 
