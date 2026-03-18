@@ -87,6 +87,20 @@ O padrão de uso excessivo de travessão em textos gerados por IA é documentado
 
 ## Padrões de Escrita
 
+### Limites por tipo de texto
+
+| Tipo de texto | Máximo de palavras | Máximo de caracteres |
+|---|---|---|
+| Headline de página | 8 palavras | 60 caracteres |
+| Subheadline | 20 palavras | 120 caracteres |
+| Título de seção | 6 palavras | — |
+| CTA (botão ou link) | 5 palavras | 40 caracteres |
+| Subject de e-mail | — | 50 caracteres |
+| Frase no corpo do texto | 20 palavras | — |
+| Parágrafo em texto digital | — | 4 linhas |
+
+Quando o conteúdo ultrapassar o limite, reescrever. Nunca resumir cortando palavras — reescrever a ideia com menos.
+
 ### Frases curtas
 - Prefira frases de até 20 palavras
 - Uma ideia por frase
@@ -111,3 +125,54 @@ Palavras a evitar sem contexto real:
 - Máximo de 4 linhas por parágrafo em textos digitais
 - Comece pelo ponto principal, não pela contextualização
 - Evite introduções que não acrescentam (ex: "É importante ressaltar que...")
+
+---
+
+## Linguagem Inclusiva e Acessível
+
+Conteúdo da Badaró deve ser legível, respeitoso e acessível para qualquer pessoa, independente de gênero, geração, capacidade ou contexto cultural.
+
+### Linguagem neutra de gênero
+- Prefira formas neutras quando o gênero não é relevante: "a pessoa responsável", "quem lidera", "o time"
+- Evite o masculino genérico como padrão: prefira "colaboradores e colaboradoras" ou, quando possível, "o time", "a equipe"
+- Ao se dirigir diretamente ao leitor, use "você" — não formas genéricas masculinas
+- Exemplos: "o usuário" → "quem usa" / "os clientes" → "clientes" / "o gestor" → "a liderança"
+
+### Linguagem centrada na pessoa
+- Coloque a pessoa antes da condição: "pessoa com deficiência", não "deficiente"
+- Evite referências a limitações físicas, cognitivas ou sensoriais como metáfora: não use "cego para", "surdo a", "paralisia de"
+- Evite referências etárias desnecessárias: não escreva "jovens profissionais" ou "geração X" sem contexto relevante
+
+### Clareza e acessibilidade de leitura
+- Prefira palavras comuns a termos técnicos quando o significado é o mesmo
+- Evite siglas sem explicação na primeira menção (regra já documentada — reforço aqui)
+- Em listas, use paralelismo: todos os itens no mesmo tempo verbal e estrutura gramatical
+- Evite ironia ou humor em contextos onde o leitor pode não ter o mesmo referencial cultural
+
+---
+
+## Escrita em Contexto de IA
+
+A Badaró usa IA como ferramenta de criação. Isso exige critério adicional: conteúdo gerado ou acelerado por IA carrega padrões linguísticos reconhecíveis que precisam ser eliminados antes da publicação.
+
+Esses padrões comprometem a autoria da marca e contradizem o posicionamento "AI Emotion-driven Experience" — que trata emoção como dado humano, não como saída de algoritmo.
+
+### Marcadores de linguagem de IA a eliminar
+
+| Padrão | Exemplo a evitar | Como corrigir |
+|---|---|---|
+| Travessão como conector | "Somos estratégicos — e humanos." | Ponto final ou vírgula (ver seção Travessão) |
+| "Não apenas X, mas Y" | "Não apenas design, mas experiência." | "Design com propósito." |
+| Adjetivos acumulados | "Estratégico, abrangente e transformador" | Escolher um. O mais preciso. |
+| Transições genéricas | "Além disso,", "Por outro lado,", "Em suma," | Construção direta sem conector |
+| Abertura com definição da empresa | "A Badaró é uma consultoria que..." | Começar pela ação ou pelo valor |
+| Encerramento com CTA genérico | "Entre em contato e saiba mais." | CTA específico ao contexto |
+| Bullet points em excesso | Lista de 8+ itens sem hierarquia | Prosa com estrutura clara |
+| Frase-resumo redundante | "Em síntese, o que foi dito acima..." | Cortar. A conclusão deve ser nova. |
+
+### Como usar IA sem perder a voz
+
+1. **Use IA para estrutura, não para tom** — deixe que a IA organize o raciocínio, mas reescreva em voz Badaró
+2. **Revise sempre com o tone-checker** — rodar `skills/tone-checker.md` após qualquer conteúdo com assistência de IA
+3. **Cheque os marcadores acima** — antes de publicar, varrer o texto pelos 8 padrões da tabela
+4. **Mantenha uma frase autoral por parágrafo** — pelo menos uma frase por bloco deve ser escrita sem assistência, como âncora de voz
