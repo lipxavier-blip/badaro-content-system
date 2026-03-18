@@ -28,8 +28,11 @@ badaro-content-system/
 ├── 6-content-patterns.md        # Padrões e estruturas de conteúdo
 ├── 7-content-governance.md      # Governança e fluxo editorial
 └── skills/
-    ├── tone-checker.md          # Verificação de tom
-    └── learn.md                 # Registro de aprendizados
+    ├── tone-checker.md                  # Verificação de tom
+    ├── learn.md                         # Registro de aprendizados
+    ├── monthly-review.md                # Revisão mensal do sistema
+    ├── auto-tone-examples.md            # Exemplos de tom automáticos
+    └── benchmark-content-systems.md    # Benchmark de sistemas de referência
 ```
 
 ## Instruções para o Claude
@@ -38,6 +41,11 @@ badaro-content-system/
 - Usar os padrões de `6-content-patterns.md` como ponto de partida para qualquer formato
 - Registrar aprendizados relevantes em `skills/learn.md`
 - Atualizar `memory.md` com decisões de projeto e contexto acumulado
+
+## Skill de benchmark
+
+Quando o usuário pedir "rodar benchmark", "analisar sistemas de conteúdo" ou similar, executar `skills/benchmark-content-systems.md`.
+Recomendado uma vez por semestre. Nunca salvar alterações sem aprovação explícita.
 
 ## Skill de revisão mensal
 
