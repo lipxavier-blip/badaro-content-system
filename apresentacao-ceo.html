@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Badaró 2026 — Posicionamento e Content System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --neo-pink:   #FF1596;
+      --magenta:    #5F0033;
+      --black:      #000000;
+      --white:      #FFFFFF;
+      --light-gray: #F4F4F2;
+      --mid-gray:   #6B6B6B;
+      --border:     #E8E8E6;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Figtree', sans-serif;
+      background: var(--black);
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    /* ── FIXED UI ── */
+    .progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      background: var(--neo-pink);
+      z-index: 100;
+      transition: width 0.4s ease;
+    }
+
+    .section-label {
+      position: fixed;
+      top: 22px; left: 28px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      color: rgba(255,255,255,0.3);
+      z-index: 100;
+      transition: color 0.3s;
+    }
+
+    .section-label.on-light { color: rgba(0,0,0,0.25); }
+
+    .nav-hint {
+      position: fixed;
+      bottom: 24px; left: 28px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.2);
+      z-index: 100;
+      letter-spacing: 0.5px;
+      transition: color 0.3s;
+    }
+
+    .nav-hint.on-light { color: rgba(0,0,0,0.2); }
+
+    .slide-counter {
+      position: fixed;
+      bottom: 24px; right: 28px;
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.2);
+      z-index: 100;
+      letter-spacing: 0.5px;
+      transition: color 0.3s;
+    }
+
+    .slide-counter.on-light { color: rgba(0,0,0,0.2); }
+
+    /* ── SLIDES ── */
+    .slides-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-start;
+      padding: 76px 88px 76px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(50px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      background: var(--light-gray);
+      overflow: hidden;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateX(0);
+    }
+
+    .slide.exit {
+      opacity: 0;
+      transform: translateX(-50px);
+      pointer-events: none;
+    }
+
+    .slide.dark { background: var(--black); }
+    .slide.center { align-items: center; justify-content: center; }
+
+    .slide-inner { max-width: 900px; width: 100%; }
+    .slide.center .slide-inner { text-align: center; }
+
+    /* ── TYPOGRAPHY ── */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--neo-pink);
+      margin-bottom: 22px;
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 5px; height: 5px;
+      background: var(--neo-pink);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    h1 {
+      font-size: clamp(42px, 6.5vw, 76px);
+      font-weight: 800;
+      letter-spacing: -2.5px;
+      line-height: 1.0;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    h1 em { font-style: normal; color: var(--neo-pink); }
+
+    h2 {
+      font-size: clamp(26px, 3.8vw, 48px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      color: var(--black);
+    }
+
+    .dark h2 { color: var(--white); }
+    h2 em { font-style: normal; color: var(--neo-pink); }
+
+    .slide-subtitle {
+      font-size: clamp(14px, 1.6vw, 18px);
+      font-weight: 400;
+      color: #555;
+      line-height: 1.65;
+      max-width: 540px;
+    }
+
+    .callout-big {
+      font-size: clamp(34px, 5.5vw, 68px);
+      font-weight: 800;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 28px;
+    }
+
+    .callout-big em { font-style: normal; color: var(--neo-pink); }
+
+    p {
+      font-size: 15px;
+      line-height: 1.65;
+      color: #333;
+      margin-bottom: 12px;
+    }
+
+    .dark p { color: #888; }
+
+    /* ── BULLETS ── */
+    .bullet-list { list-style: none; margin-top: 24px; }
+
+    .bullet-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 15.5px;
+      color: #bbb;
+      line-height: 1.55;
+    }
+
+    .bullet-list li:last-child { border-bottom: none; }
+
+    .bullet-list li::before {
+      content: '';
+      width: 5px; height: 5px;
+      background: var(--neo-pink);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 7px;
+    }
+
+    /* ── CARDS ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      border-top: 3px solid var(--neo-pink);
+    }
+
+    .card-num {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--neo-pink);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 7px;
+    }
+
+    .card-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 5px;
+      letter-spacing: -0.2px;
+    }
+
+    .card-text { font-size: 12px; color: var(--mid-gray); line-height: 1.5; }
+
+    /* ── STATS ── */
+    .stats-row {
+      display: flex;
+      gap: 0;
+      margin-top: 52px;
+      border-top: 1px solid #1a1a1a;
+      padding-top: 40px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      padding-right: 44px;
+      margin-right: 44px;
+      border-right: 1px solid #1a1a1a;
+    }
+
+    .stat:last-child { border-right: none; padding-right: 0; margin-right: 0; }
+
+    .stat-value {
+      font-size: clamp(36px, 4.5vw, 54px);
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+
+    .stat-value em { font-style: normal; color: var(--neo-pink); }
+
+    .stat-label {
+      font-size: 10px;
+      color: #444;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      font-weight: 600;
+      margin-top: 5px;
+    }
+
+    /* ── BEFORE / AFTER ── */
+    .ba-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .ba-col {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .ba-header {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 9px 16px;
+      background: var(--light-gray);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ba-header.bad  { color: #CC0077; }
+    .ba-header.good { color: #007A3D; }
+
+    .ba-text {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: #333;
+      padding: 14px 16px;
+      font-style: italic;
+    }
+
+    /* ── TABLE ── */
+    .table-wrap {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      margin-top: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--white);
+      font-size: 13.5px;
+    }
+
+    thead th {
+      text-align: left;
+      padding: 10px 16px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--mid-gray);
+      background: var(--light-gray);
+      border-bottom: 1px solid var(--border);
+    }
+
+    tbody td {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border);
+      color: #222;
+      vertical-align: top;
+    }
+
+    tbody tr:last-child td { border-bottom: none; }
+    tbody td:first-child { font-weight: 600; }
+
+    .tag-ban {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 100px;
+      background: #FFF0F7;
+      color: #CC0077;
+      border: 1px solid #FFB3D9;
+    }
+
+    /* ── FLOW ── */
+    .flow {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 28px;
+    }
+
+    .flow-step {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 8px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--black);
+    }
+
+    .flow-arrow { color: var(--neo-pink); font-size: 16px; font-weight: 700; }
+
+    /* ── STEPS ── */
+    .steps-list { list-style: none; margin-top: 28px; }
+
+    .steps-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .steps-list li:last-child { border-bottom: none; }
+
+    .step-num {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--neo-pink);
+      flex-shrink: 0;
+      width: 22px;
+      padding-top: 2px;
+    }
+
+    .step-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 3px;
+    }
+
+    .step-desc { font-size: 13px; color: var(--mid-gray); line-height: 1.5; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .slide { padding: 60px 24px; }
+      .card-grid { grid-template-columns: 1fr 1fr; }
+      .stats-row { flex-direction: column; gap: 24px; }
+      .stat { border-right: none; padding-right: 0; margin-right: 0; border-bottom: 1px solid #1a1a1a; padding-bottom: 16px; }
+      .stat:last-child { border-bottom: none; padding-bottom: 0; }
+      .ba-grid { grid-template-columns: 1fr; }
+      .nav-hint { left: 20px; bottom: 16px; }
+      .slide-counter { right: 20px; bottom: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+<div class="section-label" id="sectionLabel"></div>
+<div class="nav-hint" id="navHint">← →</div>
+<div class="slide-counter" id="slideCounter">1 / 15</div>
+
+<div class="slides-container" id="slidesContainer">
+
+  <!-- 01 CAPA -->
+  <div class="slide dark center active" data-section="">
+    <div class="slide-inner">
+      <div class="eyebrow">Badaró · 2026</div>
+      <h1>Posicionamento<br>e Content <em>System</em></h1>
+      <p class="slide-subtitle">Apresentação estratégica para aprovação do posicionamento AI Emotion-driven Experience e do sistema editorial que o operacionaliza.</p>
+    </div>
+  </div>
+
+  <!-- 02 CONTEXTO -->
+  <div class="slide dark" data-section="Posicionamento">
+    <div class="slide-inner">
+      <div class="eyebrow">Contexto</div>
+      <h2>O mercado mudou.<br>Velocidade <em>não é mais</em> diferencial.</h2>
+      <ul class="bullet-list">
+        <li>Interfaces são geradas por IA em minutos. Conteúdo é escalado sem esforço. A eficiência técnica virou commodity.</li>
+        <li>O que ficou escasso é a experiência que gera vínculo real. Aquela que faz sentido para quem usa. Que sustenta confiança ao longo do tempo.</li>
+        <li>Sem emoção como critério, IA amplifica o genérico. Com emoção como critério, IA acelera o que funciona.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 03 O PROBLEMA -->
+  <div class="slide" data-section="Posicionamento">
+    <div class="slide-inner">
+      <div class="eyebrow">O problema</div>
+      <h2>Organizações investem em pesquisa, design e tecnologia. E ainda assim entregam produtos que as pessoas <em>abandonam</em>.</h2>
+      <p style="margin-top: 20px; max-width: 640px;">A razão raramente está na qualidade técnica. Está na ausência de um critério que deveria estar no centro de tudo: o que as pessoas sentem quando interagem com o que foi criado.</p>
+      <p style="max-width: 640px;">Emoção costuma aparecer no final. Na campanha de lançamento. No discurso de marca. Isso não é estratégia. É decoração.</p>
+    </div>
+  </div>
+
+  <!-- 04 TESE CENTRAL -->
+  <div class="slide dark center" data-section="Posicionamento">
+    <div class="slide-inner">
+      <div class="callout-big">Emoção não é<br>intuição. <em>É dado.</em></div>
+      <p style="color: #555; max-width: 500px; margin: 0 auto; font-size: 16px; line-height: 1.65;">Sinais emocionais são mensuráveis, identificáveis na jornada e usados como critério de projeto, da pesquisa até a decisão de tecnologia.</p>
+    </div>
+  </div>
+
+  <!-- 05 AI EMOTION-DRIVEN EXPERIENCE -->
+  <div class="slide" data-section="Posicionamento">
+    <div class="slide-inner">
+      <div class="eyebrow">O posicionamento</div>
+      <h2><em>AI Emotion-driven</em> Experience</h2>
+      <p style="margin-top: 12px; max-width: 660px; font-size: 15.5px;">Consultoria estratégica de design e tecnologia que, há mais de 12 anos, orienta decisões organizacionais a partir de experiências reais. Pesquisa, design e tecnologia integrados com clareza, precisão e impacto mensurável.</p>
+      <p style="max-width: 660px; font-size: 15.5px;">O "AI" no posicionamento não promete ferramentas específicas. Posiciona a Badaró em um mercado acelerado por IA, onde a emoção como critério é o que diferencia o que funciona do que é apenas gerado.</p>
+      <p style="max-width: 660px; font-size: 15.5px;">A Badaró opera a partir dessa premissa há mais de doze anos. Emoção não é o tema da campanha. É a variável que orienta o diagnóstico, valida a solução e mede o resultado.</p>
+    </div>
+  </div>
+
+  <!-- 06 PILARES -->
+  <div class="slide" data-section="Posicionamento">
+    <div class="slide-inner">
+      <div class="eyebrow">Os 5 pilares</div>
+      <h2>A mensagem da Badaró<br>se sustenta em <em>cinco bases</em></h2>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-num">Pilar 01</div>
+          <div class="card-title">Emoção como estratégia</div>
+          <div class="card-text">Dado mensurável que orienta decisões melhores. Critério de projeto, não decoração.</div>
+        </div>
+        <div class="card">
+          <div class="card-num">Pilar 02</div>
+          <div class="card-title">Experiência como ponto de partida</div>
+          <div class="card-text">Antes de propor qualquer solução, a Badaró escuta profundamente.</div>
+        </div>
+        <div class="card">
+          <div class="card-num">Pilar 03</div>
+          <div class="card-title">Integração das disciplinas</div>
+          <div class="card-text">Pesquisa, design e tecnologia com coerência estratégica e rigor metodológico.</div>
+        </div>
+        <div class="card">
+          <div class="card-num">Pilar 04</div>
+          <div class="card-title">Parceria de longo prazo</div>
+          <div class="card-text">Trabalho lado a lado, respeitando a cultura e a governança de cada cliente.</div>
+        </div>
+        <div class="card">
+          <div class="card-num">Pilar 05</div>
+          <div class="card-title">Impacto mensurável</div>
+          <div class="card-text">Cada projeto gera valor prático com critérios claros e visão de longo prazo.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 EVIDÊNCIA -->
+  <div class="slide dark" data-section="Posicionamento">
+    <div class="slide-inner">
+      <div class="eyebrow">A evidência</div>
+      <h2>A tese não é conceitual.<br><em>Doze anos de projetos</em> comprovam.</h2>
+      <div class="stats-row">
+        <div class="stat">
+          <div class="stat-value">12<em>+</em></div>
+          <div class="stat-label">Anos de atuação</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">200<em>+</em></div>
+          <div class="stat-label">Projetos entregues</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">80<em>+</em></div>
+          <div class="stat-label">Organizações</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">15<em>+</em></div>
+          <div class="stat-label">Setores</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value"><em>5</em></div>
+          <div class="stat-label">Disciplinas integradas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 08 ANTES / DEPOIS -->
+  <div class="slide" data-section="Posicionamento">
+    <div class="slide-inner">
+      <div class="eyebrow">Manifestação</div>
+      <h2>O posicionamento se traduz<br>em <em>cada palavra</em> produzida</h2>
+      <div class="ba-grid">
+        <div class="ba-col">
+          <div class="ba-header bad">Antes — voz genérica</div>
+          <div class="ba-text">"Oferecemos soluções inovadoras de Customer Experience para empresas que buscam se destacar no mercado."</div>
+        </div>
+        <div class="ba-col">
+          <div class="ba-header good">Depois — voz Badaró</div>
+          <div class="ba-text">"Desenhamos experiências de cliente a partir da jornada real, identificando emoções, fricções e oportunidades que influenciam decisões, engajamento e fidelização."</div>
+        </div>
+        <div class="ba-col">
+          <div class="ba-header bad">Antes — CTA fraco</div>
+          <div class="ba-text">"Pronto para evoluir com coerência emocional e impacto mensurável?"</div>
+        </div>
+        <div class="ba-col">
+          <div class="ba-header good">Depois — CTA Badaró</div>
+          <div class="ba-text">"Seu próximo projeto começa por uma conversa."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 09 TRANSIÇÃO CONTENT SYSTEM -->
+  <div class="slide dark center" data-section="Content System">
+    <div class="slide-inner">
+      <div class="eyebrow">Content System</div>
+      <div class="callout-big" style="font-size: clamp(26px, 4vw, 52px);">Como garantimos que esse posicionamento se manifesta<br><em>em cada palavra produzida.</em></div>
+    </div>
+  </div>
+
+  <!-- 10 O QUE É O CONTENT SYSTEM -->
+  <div class="slide" data-section="Content System">
+    <div class="slide-inner">
+      <div class="eyebrow">O sistema</div>
+      <h2>O Content System da Badaró</h2>
+      <p style="margin-top: 12px; font-size: 16px; max-width: 640px; line-height: 1.7;">Sistema editorial que reúne as regras verbais, a identidade, a mensagem, o tom e a governança de todo conteúdo da Badaró. Existe para garantir que qualquer material produzido — do site a uma proposta comercial — expresse o posicionamento com precisão e consistência.</p>
+      <div class="flow">
+        <div class="flow-step">Identidade</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Mensagem</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Tom</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Padrões</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Governança</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11 OS 7 MÓDULOS -->
+  <div class="slide" data-section="Content System">
+    <div class="slide-inner">
+      <div class="eyebrow">Estrutura</div>
+      <h2><em>7 módulos</em> + 3 skills de verificação</h2>
+      <div class="card-grid" style="grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 20px;">
+        <div class="card" style="padding: 14px 16px;">
+          <div class="card-num">01</div>
+          <div class="card-title" style="font-size: 12.5px;">Foundations</div>
+          <div class="card-text">Princípios editoriais</div>
+        </div>
+        <div class="card" style="padding: 14px 16px;">
+          <div class="card-num">02</div>
+          <div class="card-title" style="font-size: 12.5px;">Verbal Identity</div>
+          <div class="card-text">Propósito e personalidade</div>
+        </div>
+        <div class="card" style="padding: 14px 16px;">
+          <div class="card-num">03</div>
+          <div class="card-title" style="font-size: 12.5px;">Messaging</div>
+          <div class="card-text">Pilares e narrativas</div>
+        </div>
+        <div class="card" style="padding: 14px 16px;">
+          <div class="card-num">04</div>
+          <div class="card-title" style="font-size: 12.5px;">Voice &amp; Tone</div>
+          <div class="card-text">Tom por contexto</div>
+        </div>
+        <div class="card" style="padding: 14px 16px;">
+          <div class="card-num">05</div>
+          <div class="card-title" style="font-size: 12.5px;">Style Guide</div>
+          <div class="card-text">Regras e glossário</div>
+        </div>
+        <div class="card" style="padding: 14px 16px;">
+          <div class="card-num">06</div>
+          <div class="card-title" style="font-size: 12.5px;">Patterns</div>
+          <div class="card-text">Estruturas por formato</div>
+        </div>
+        <div class="card" style="padding: 14px 16px;">
+          <div class="card-num">07</div>
+          <div class="card-title" style="font-size: 12.5px;">Governance</div>
+          <div class="card-text">Fluxo e revisão</div>
+        </div>
+        <div class="card" style="padding: 14px 16px; border-top-color: #ccc; background: #fafafa;">
+          <div class="card-num" style="color: var(--mid-gray);">Skills</div>
+          <div class="card-title" style="font-size: 12.5px;">3 verificações</div>
+          <div class="card-text">Tone · Benchmark · Review</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 12 REGRAS CRÍTICAS -->
+  <div class="slide" data-section="Content System">
+    <div class="slide-inner">
+      <div class="eyebrow">Regras críticas</div>
+      <h2>O que garante a<br><em>consistência da voz</em></h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Regra</th><th>Aplicação</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tag-ban">futuro</span> — banida</td>
+              <td>Substituir por "o que muda", "estrutura para evoluir", "o que vem"</td>
+            </tr>
+            <tr>
+              <td>Engenharia → tecnologia</td>
+              <td>Alinhamento ao glossário da marca em todas as ocorrências</td>
+            </tr>
+            <tr>
+              <td>Ajudar → orientar / estruturar</td>
+              <td>Anti-voz: humildade excessiva ativa postura de subserviência</td>
+            </tr>
+            <tr>
+              <td>Travessão proibido no conteúdo</td>
+              <td>Marcador de linguagem de IA. Substituir por vírgula, ponto ou dois-pontos</td>
+            </tr>
+            <tr>
+              <td>Voz ativa obrigatória</td>
+              <td>"Orientamos o diagnóstico" — não "o diagnóstico é conduzido"</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 13 COMO USAR -->
+  <div class="slide" data-section="Content System">
+    <div class="slide-inner">
+      <div class="eyebrow">Como usar</div>
+      <h2>Todo conteúdo da Badaró<br>passa pelo <em>mesmo fluxo</em></h2>
+      <div class="flow">
+        <div class="flow-step">Consultar identidade</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Usar padrão do formato</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Rodar Tone Checker</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Publicar</div>
+      </div>
+      <p style="margin-top: 32px; font-size: 14.5px; color: var(--mid-gray); max-width: 540px; line-height: 1.65;">O Tone Checker é executado automaticamente a cada conteúdo criado, verificando alinhamento com a voz, ausência de anti-voz e padrões de linguagem de IA a eliminar antes da publicação.</p>
+    </div>
+  </div>
+
+  <!-- 14 PRÓXIMOS PASSOS -->
+  <div class="slide" data-section="Encerramento">
+    <div class="slide-inner">
+      <div class="eyebrow">Próximos passos</div>
+      <h2>O que precisamos<br><em>decidir hoje</em></h2>
+      <ul class="steps-list">
+        <li>
+          <div class="step-num">01</div>
+          <div>
+            <div class="step-title">Aprovação do posicionamento</div>
+            <div class="step-desc">Validar AI Emotion-driven Experience como posicionamento oficial da Badaró para 2026.</div>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">02</div>
+          <div>
+            <div class="step-title">Publicação do Content System</div>
+            <div class="step-desc">Tornar o sistema disponível como referência oficial para toda criação de conteúdo da marca.</div>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">03</div>
+          <div>
+            <div class="step-title">Alinhamento com o time de criação</div>
+            <div class="step-desc">Sessão de onboarding para quem produz conteúdo conhecer e aplicar o sistema.</div>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">04</div>
+          <div>
+            <div class="step-title">Finalização dos materiais pendentes</div>
+            <div class="step-desc">AI Experience, Método e Cases: páginas ainda sem conteúdo revisado pelo sistema.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 15 ENCERRAMENTO -->
+  <div class="slide dark center" data-section="">
+    <div class="slide-inner">
+      <div class="callout-big">Emoção não é<br>intuição. <em>É dado.</em></div>
+      <p style="color: #444; margin-top: 16px; font-size: 13px; letter-spacing: 0.5px;">Badaró · AI Emotion-driven Experience · 2026</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const slides       = document.querySelectorAll('.slide');
+  const total        = slides.length;
+  let   current      = 0;
+  let   isAnimating  = false;
+
+  const progressBar  = document.getElementById('progressBar');
+  const sectionLabel = document.getElementById('sectionLabel');
+  const slideCounter = document.getElementById('slideCounter');
+  const navHint      = document.getElementById('navHint');
+
+  function updateUI() {
+    const slide   = slides[current];
+    const onLight = !slide.classList.contains('dark');
+
+    progressBar.style.width = ((current + 1) / total * 100) + '%';
+
+    slideCounter.textContent = (current + 1) + ' / ' + total;
+    slideCounter.className   = 'slide-counter'  + (onLight ? ' on-light' : '');
+    navHint.className        = 'nav-hint'        + (onLight ? ' on-light' : '');
+    sectionLabel.textContent = slide.dataset.section || '';
+    sectionLabel.className   = 'section-label'  + (onLight ? ' on-light' : '');
+  }
+
+  function goTo(index) {
+    if (isAnimating || index < 0 || index >= total) return;
+    isAnimating = true;
+
+    const from = slides[current];
+    const to   = slides[index];
+
+    from.classList.add('exit');
+    from.classList.remove('active');
+
+    setTimeout(() => {
+      from.classList.remove('exit');
+      current = index;
+      to.classList.add('active');
+      updateUI();
+      setTimeout(() => { isAnimating = false; }, 350);
+    }, 350);
+  }
+
+  const next = () => goTo(current + 1);
+  const prev = () => goTo(current - 1);
+
+  // Keyboard
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+    if (e.key === 'ArrowLeft')                   { e.preventDefault(); prev(); }
+  });
+
+  // Click (right half = next, left half = prev)
+  document.getElementById('slidesContainer').addEventListener('click', e => {
+    e.clientX > window.innerWidth / 2 ? next() : prev();
+  });
+
+  // Touch swipe
+  let touchStartX = 0;
+  document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend',   e => {
+    const dx = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(dx) > 48) dx > 0 ? next() : prev();
+  });
+
+  updateUI();
+</script>
+</body>
+</html>
