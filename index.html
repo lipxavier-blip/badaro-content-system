@@ -598,6 +598,67 @@
       line-height: 1.55;
     }
 
+    /* ── COLLAPSIBLE ── */
+    .section-header {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .section-toggle {
+      margin-left: auto;
+      width: 28px;
+      height: 28px;
+      background: var(--light-gray);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .section-toggle svg {
+      transition: transform 0.3s ease;
+    }
+
+    .section.open .section-toggle {
+      background: var(--neo-pink);
+      border-color: var(--neo-pink);
+    }
+
+    .section.open .section-toggle svg {
+      transform: rotate(180deg);
+    }
+
+    .section:not(.open) .section-header {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    .section:not(.open) {
+      margin-bottom: 4px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 24px;
+    }
+
+    .section-body {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.35s ease;
+    }
+
+    .section.open .section-body {
+      grid-template-rows: 1fr;
+    }
+
+    .section-inner {
+      overflow: hidden;
+    }
+
     /* ── SCROLLBAR ── */
     .sidebar::-webkit-scrollbar { width: 3px; }
     .sidebar::-webkit-scrollbar-track { background: transparent; }
@@ -1465,6 +1526,40 @@
   links.forEach(l => l.addEventListener('click', () => {
     if (window.innerWidth <= 768) closeMenu();
   }));
+
+  // Accordion
+  document.querySelectorAll('.section').forEach((section, index) => {
+    const header = section.querySelector('.section-header');
+
+    // Chevron
+    const toggle = document.createElement('div');
+    toggle.className = 'section-toggle';
+    toggle.innerHTML = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4.5L7 9.5L12 4.5" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    header.appendChild(toggle);
+
+    // Wrap body content
+    const body = document.createElement('div');
+    body.className = 'section-body';
+    const inner = document.createElement('div');
+    inner.className = 'section-inner';
+    Array.from(section.children).slice(1).forEach(child => inner.appendChild(child));
+    body.appendChild(inner);
+    section.appendChild(body);
+
+    // First section open by default
+    if (index === 0) section.classList.add('open');
+
+    // Toggle
+    header.addEventListener('click', () => section.classList.toggle('open'));
+
+    // Nav click opens section
+    const link = document.querySelector(`.sidebar nav a[href="#${section.id}"]`);
+    if (link) {
+      link.addEventListener('click', () => {
+        if (!section.classList.contains('open')) section.classList.add('open');
+      });
+    }
+  });
 </script>
 </body>
 </html>
