@@ -40,6 +40,12 @@ Contexto acumulado do projeto ao longo do tempo.
 - ⚠️ Números (200+ projetos, 80+ organizações, 15+ setores) ainda precisam de validação com dados reais antes de publicar qualquer material
 - Decisão: o termo "AI" em "AI Emotion-driven Experience" posiciona no contexto de mercado atual, não promete ferramentas específicas — explicação incluída no slide 6 da apresentação
 
+### 24 mar 2026 — Revisão para CEO + Apresentação HTML
+
+- `index.html` revisado para apresentação ao CEO: 6 correções de marca (futuro, engenharia→tecnologia, ajudar→orientar, estruturas de negação), herói reformulado com tese central como título, Tese movida para módulo 00 (primeira seção), accordion collapsível em todas as seções (Tese abre por padrão)
+- `apresentacao-ceo.html` criado: 15 slides fullscreen HTML, Posicionamento (slides 1–8) + Content System (slides 9–13) + Fechamento (14–15). Navegação por teclado/clique/swipe. Paleta Badaró, Figtree, barra de progresso, label de seção, contador.
+- `content/roteiro-apresentacao-ceo-content-system.md` criado: script de fala slide a slide, 18–22 min, com tempos estimados e dicas de apresentação.
+
 ### Março 2026 — Setup inicial
 - Content System criado com 7 módulos a partir do Manual de Marca Simplificado e da apresentação de posicionamento da Badaró
 - Interface web em `index.html` com identidade visual aplicada (Figtree, Neo Pink #FF1596, Magenta #5F0033, Black #000000)
